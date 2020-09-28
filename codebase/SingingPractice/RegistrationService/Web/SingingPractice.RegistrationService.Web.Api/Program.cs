@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.ApplicationInsights;
+using SingingPractice.Common.Constants;
 
 namespace SingingPractice.RegistrationService.Web.Api
 {
@@ -19,6 +18,11 @@ namespace SingingPractice.RegistrationService.Web.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureLogging(builder =>
+                {
+                    builder.AddApplicationInsights(EnvironmentConstants.AppInsightsInstrumenationKey);
+                    builder.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Information);
                 });
     }
 }

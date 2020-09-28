@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\SingingPractice.Common.Logic\SingingPractice.Common.Logic.csproj" />
+    <ProjectReference Include="..\..\..\Common\SingingPractice.Common\SingingPractice.Common.csproj" />
     <ProjectReference Include="..\SingingPractice.RegistrationService.Web.Common\SingingPractice.RegistrationService.Web.Common.csproj" />
     <ProjectReference Include="..\SingingPractice.RegistrationService.Web.Logic\SingingPractice.RegistrationService.Web.Logic.csproj" />
   </ItemGroup>
