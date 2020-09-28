@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SignatureGenerator", "SignatureGenerator", "{625009B5-1BF7-4C73-A13A-A1B424850F69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RegistrationService", "RegistrationService", "{24E26A69-6CA0-430A-908F-465DE6F2DBE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{DDE6781B-00B2-4B9D-9D7F-DE8EF3F09E9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingingPractice.RegistrationService.Web.Common", "RegistrationService\Web\SingingPractice.RegistrationService.Web.Common\SingingPractice.RegistrationService.Web.Common.csproj", "{BFD9CFAA-5031-47B7-82A8-F7996494C152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.RegistrationService.Web.Logic", "RegistrationService\Web\SingingPractice.RegistrationService.Web.Logic\SingingPractice.RegistrationService.Web.Logic.csproj", "{2631CB08-5E86-4D03-AF7A-277BA6FEFD18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.RegistrationService.Web.Api", "RegistrationService\Web\SingingPractice.RegistrationService.Web.Api\SingingPractice.RegistrationService.Web.Api.csproj", "{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.SignatureGenerator.Common", "SignatureGenerator\SingingPractice.SignatureGenerator.Common\SingingPractice.SignatureGenerator.Common.csproj", "{B7214D93-D75B-4A11-9D59-A0935D786DFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.SignatureGenerator.Logic", "SignatureGenerator\SingingPractice.SignatureGenerator.Logic\SingingPractice.SignatureGenerator.Logic.csproj", "{E7FDF422-253D-402C-92DF-D00E22A81939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B8E12A54-E879-4F06-821D-D6C86EB6E216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.Common", "Common\SingingPractice.Common\SingingPractice.Common.csproj", "{6D6490BC-79BE-4A66-BB2B-2C22B0B22373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingingPractice.Common.Logic", "Common\SingingPractice.Common.Logic\SingingPractice.Common.Logic.csproj", "{A674822D-4E85-495E-A501-047B4DB08049}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFD9CFAA-5031-47B7-82A8-F7996494C152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD9CFAA-5031-47B7-82A8-F7996494C152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD9CFAA-5031-47B7-82A8-F7996494C152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD9CFAA-5031-47B7-82A8-F7996494C152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2631CB08-5E86-4D03-AF7A-277BA6FEFD18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2631CB08-5E86-4D03-AF7A-277BA6FEFD18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2631CB08-5E86-4D03-AF7A-277BA6FEFD18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2631CB08-5E86-4D03-AF7A-277BA6FEFD18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7214D93-D75B-4A11-9D59-A0935D786DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7214D93-D75B-4A11-9D59-A0935D786DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7214D93-D75B-4A11-9D59-A0935D786DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7214D93-D75B-4A11-9D59-A0935D786DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7FDF422-253D-402C-92DF-D00E22A81939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7FDF422-253D-402C-92DF-D00E22A81939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7FDF422-253D-402C-92DF-D00E22A81939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7FDF422-253D-402C-92DF-D00E22A81939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6490BC-79BE-4A66-BB2B-2C22B0B22373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6490BC-79BE-4A66-BB2B-2C22B0B22373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6490BC-79BE-4A66-BB2B-2C22B0B22373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6490BC-79BE-4A66-BB2B-2C22B0B22373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A674822D-4E85-495E-A501-047B4DB08049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A674822D-4E85-495E-A501-047B4DB08049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A674822D-4E85-495E-A501-047B4DB08049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A674822D-4E85-495E-A501-047B4DB08049}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDE6781B-00B2-4B9D-9D7F-DE8EF3F09E9D} = {24E26A69-6CA0-430A-908F-465DE6F2DBE8}
+		{BFD9CFAA-5031-47B7-82A8-F7996494C152} = {DDE6781B-00B2-4B9D-9D7F-DE8EF3F09E9D}
+		{2631CB08-5E86-4D03-AF7A-277BA6FEFD18} = {DDE6781B-00B2-4B9D-9D7F-DE8EF3F09E9D}
+		{D5EA77B2-5C28-4555-8096-FBEA9B5A81A2} = {DDE6781B-00B2-4B9D-9D7F-DE8EF3F09E9D}
+		{B7214D93-D75B-4A11-9D59-A0935D786DFE} = {625009B5-1BF7-4C73-A13A-A1B424850F69}
+		{E7FDF422-253D-402C-92DF-D00E22A81939} = {625009B5-1BF7-4C73-A13A-A1B424850F69}
+		{6D6490BC-79BE-4A66-BB2B-2C22B0B22373} = {B8E12A54-E879-4F06-821D-D6C86EB6E216}
+		{A674822D-4E85-495E-A501-047B4DB08049} = {B8E12A54-E879-4F06-821D-D6C86EB6E216}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51EA74A4-EE4B-4FF8-AE4E-36CC8A71F8FF}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>7c392c28-2008-4101-a66a-9447584faa1f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+    <ApplicationInsightsResourceId>/subscriptions/7de85745-9268-4347-9a96-9dabe4e3b8e6/resourceGroups/interviews/providers/microsoft.insights/components/dsinging-practice</ApplicationInsightsResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SingingPractice.RegistrationService.Web.Common\SingingPractice.RegistrationService.Web.Common.csproj" />
+    <ProjectReference Include="..\SingingPractice.RegistrationService.Web.Logic\SingingPractice.RegistrationService.Web.Logic.csproj" />
+  </ItemGroup>
+
+
+</Project>
