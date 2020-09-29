@@ -9,7 +9,6 @@ namespace SingingPractice.SignatureGenerator.Function
         [FunctionName("SignatureGenerator")]
         public static void Run([ServiceBusTrigger("singing-practice", Connection = "ServiceBusReaderConnection")]string myQueueItem, ILogger log)
         {
-            Console.WriteLine($"Console: C# ServiceBus queue trigger function processed message: {myQueueItem}");
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
         }
     }

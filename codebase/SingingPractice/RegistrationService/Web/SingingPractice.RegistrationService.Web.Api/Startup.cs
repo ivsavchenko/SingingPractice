@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SingingPractice.RegistrationService.Web.Common.Contracts.Managers;
+using SingingPractice.RegistrationService.Web.Logic.Managers;
 
 namespace SingingPractice.RegistrationService.Web.Api
 {
@@ -20,6 +22,8 @@ namespace SingingPractice.RegistrationService.Web.Api
         {
             services.AddControllers();
             services.AddApplicationInsightsTelemetry();
+
+            AddServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +44,11 @@ namespace SingingPractice.RegistrationService.Web.Api
             {
                 endpoints.MapControllers();
             });
+        }
+        
+        public void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<ILicenseManager, LicenseManager>();
         }
     }
 }
