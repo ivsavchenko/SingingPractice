@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SingingPractice.RegistrationService.Web.Common.Enums;
+using SingingPractice.RegistrationService.Web.Common.Models.Licenses;
 
 namespace SingingPractice.RegistrationService.Web.Common.Contracts.Managers
 {
@@ -7,6 +9,8 @@ namespace SingingPractice.RegistrationService.Web.Common.Contracts.Managers
     {
         Task<Guid> IssueAsync();
 
-        Task ActivateAsync();
+        Task ActivateAsync(ActivateLicenseDto dto);
+
+        Task<LicenseStatus> ValidateAsync(Guid key);
     }
 }
