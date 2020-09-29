@@ -7,10 +7,10 @@ namespace SingingPractice.RegistrationService.Web.Common.Contracts.Managers
 {
     public interface ILicenseManager
     {
-        Task<Guid> IssueAsync();
+        Task<string> IssueAsync();
 
         Task ActivateAsync(ActivateLicenseDto dto);
 
-        Task<LicenseStatus> ValidateAsync(Guid key);
+        Task<LicenseStatus> ValidateAsync(string key);
     }
 }

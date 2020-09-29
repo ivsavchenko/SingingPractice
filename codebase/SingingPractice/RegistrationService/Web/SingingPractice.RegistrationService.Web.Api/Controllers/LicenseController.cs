@@ -19,6 +19,10 @@ namespace SingingPractice.RegistrationService.Web.Api.Controllers
             this.licenseManager = licenseManager;
         }
 
+        /// <summary>
+        /// It's for testing needs only
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("issue")]
         public async Task<IActionResult> IssueAsync()
@@ -28,11 +32,11 @@ namespace SingingPractice.RegistrationService.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("validate/{key}")]
-        public async Task<IActionResult> ValidateAsync(Guid key)
+        [Route("validate")]
+        public async Task<IActionResult> ValidateAsync([FromBody]string key)
         {
             var status = await licenseManager.ValidateAsync(key);
-            return Ok();
+            return Ok(status);
         }
 
         [HttpPost]

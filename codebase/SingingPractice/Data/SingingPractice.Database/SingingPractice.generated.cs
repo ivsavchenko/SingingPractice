@@ -44,16 +44,16 @@ namespace SingingPractice.Database
 	[Table(Schema="dbo", Name="Licenses")]
 	public partial class License
 	{
-		[PrimaryKey, Identity   ] public int       Id             { get; set; } // int
-		[Column,     NotNull    ] public Guid      Salt           { get; set; } // uniqueidentifier
+		[PrimaryKey, NotNull    ] public Guid      Id             { get; set; } // uniqueidentifier
 		[Column,     NotNull    ] public string    KeyHash        { get; set; } // nvarchar(100)
+		[Column,     NotNull    ] public string    Salt           { get; set; } // nvarchar(100)
 		[Column,     NotNull    ] public DateTime  CreationDate   { get; set; } // datetime
 		[Column,        Nullable] public DateTime? ActivationDate { get; set; } // datetime
 	}
 
 	public static partial class TableExtensions
 	{
-		public static License Find(this ITable<License> table, int Id)
+		public static License Find(this ITable<License> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>
 				t.Id == Id);

@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\SingingPractice.Common.Logic\SingingPractice.Common.Logic.csproj" />
+    <ProjectReference Include="..\..\..\Common\SingingPractice.Common\SingingPractice.Common.csproj" />
+    <ProjectReference Include="..\..\..\Data\SingingPractice.Database\SingingPractice.Database.csproj" />
     <ProjectReference Include="..\SingingPractice.RegistrationService.Web.Common\SingingPractice.RegistrationService.Web.Common.csproj" />
   </ItemGroup>
 
