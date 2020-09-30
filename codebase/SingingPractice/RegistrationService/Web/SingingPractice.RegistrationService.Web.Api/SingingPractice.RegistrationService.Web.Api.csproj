@@ -8,6 +8,11 @@
     <ApplicationInsightsResourceId>/subscriptions/7de85745-9268-4347-9a96-9dabe4e3b8e6/resourceGroups/interviews/providers/microsoft.insights/components/dsinging-practice</ApplicationInsightsResourceId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Projects\SingingPractice\codebase\SingingPractice\RegistrationService\Web\SingingPractice.RegistrationService.Web.Api\SingingPractice.RegistrationService.Web.Api.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
     <PackageReference Include="Azure.Identity" Version="1.1.1" />

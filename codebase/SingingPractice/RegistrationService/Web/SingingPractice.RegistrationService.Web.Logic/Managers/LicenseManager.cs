@@ -30,7 +30,6 @@ namespace SingingPractice.RegistrationService.Web.Logic.Managers
 
         public async Task<LicenseStatus> ValidateAsync(string key)
         {
-            // TODO handle all exceptions and hide them from the end user 
             var issuedLicense = key.FromJsonBase64<IssuedLicenseDto>();
             var license = await singingPracticeDb.Licenses.FirstOrDefaultAsync(l => l.Id == issuedLicense.Id);
 

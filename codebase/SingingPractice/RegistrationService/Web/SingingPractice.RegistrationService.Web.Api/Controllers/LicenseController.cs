@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SingingPractice.RegistrationService.Web.Common.Contracts.Managers;
@@ -20,9 +19,9 @@ namespace SingingPractice.RegistrationService.Web.Api.Controllers
         }
 
         /// <summary>
-        /// It's for testing needs only
+        /// Issues license key for testing needs. In the real world application this method mustn't be public
         /// </summary>
-        /// <returns></returns>
+        /// <returns>License key</returns>
         [HttpPost]
         [Route("issue")]
         public async Task<IActionResult> IssueAsync()
@@ -31,6 +30,11 @@ namespace SingingPractice.RegistrationService.Web.Api.Controllers
             return Ok(key);
         }
 
+        /// <summary>
+        /// Validate issued license key.
+        /// </summary>
+        /// <param name="key">License key to validate</param>
+        /// <returns>One of the statuses of the license key: Invalid, Inactive, Active</returns>
         [HttpPost]
         [Route("validate")]
         public async Task<IActionResult> ValidateAsync([FromBody]string key)
@@ -39,6 +43,10 @@ namespace SingingPractice.RegistrationService.Web.Api.Controllers
             return Ok(status);
         }
 
+        /// <summary>
+        /// Activate issued license key and bind it to a given user
+        /// </summary>
+        /// <example>Example of input data: {"Key":"ef031840-657f-49c1-aa28-ece8f83f8183","User":{"Name":"Qwerty","Email":"m@m.m","Address":"some address"}}</example>
         [HttpPost]
         [Route("activate")]
         public async Task<IActionResult> ActivateAsync([FromBody]ActivateLicenseDto dto)
