@@ -7,9 +7,9 @@ namespace SingingPractice.SignatureGenerator.Logic.Services
 {
     public class FakeEmailNotificationSender : INotificationSender
     {
-        private readonly ILogger logger;
+        private readonly ILogger<FakeEmailNotificationSender> logger;
 
-        public FakeEmailNotificationSender(ILogger logger)
+        public FakeEmailNotificationSender(ILogger<FakeEmailNotificationSender> logger)
         {
             this.logger = logger;
         }

@@ -1,6 +1,5 @@
-using System;
+using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
 using SingingPractice.SignatureGenerator.Common.Contracts.Services;
 
 namespace SingingPractice.SignatureGenerator.Function
@@ -15,9 +14,9 @@ namespace SingingPractice.SignatureGenerator.Function
         }
 
         [FunctionName("SignatureGenerator")]
-        public void Run([ServiceBusTrigger("singing-practice", Connection = "ServiceBusReaderConnection")]string myQueueItem, ILogger log)
+        public async Task Run([ServiceBusTrigger("singing-practice", Connection = "ServiceBusReaderConnection")]string myQueueItem)
         {
-            log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
+            await notificationSender.SendAsync(myQueueItem);
         }
     }
 }
