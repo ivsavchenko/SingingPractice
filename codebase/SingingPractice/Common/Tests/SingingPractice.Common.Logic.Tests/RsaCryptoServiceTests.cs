@@ -1,6 +1,6 @@
 using System;
-using System.Text;
 using NUnit.Framework;
+using SingingPractice.Common.Logic.Extensions;
 using SingingPractice.Common.Logic.Services;
 
 namespace SingingPractice.Common.Logic.Tests
@@ -47,7 +47,7 @@ namespace SingingPractice.Common.Logic.Tests
         public void RsaCryptoKeysSigning()
         {
             var data = "Hello World!";
-            var dataBytes = Encoding.UTF8.GetBytes(data);
+            var dataBytes = data.GetBytes();
             using var cryptoServiceToSign = new RsaCryptoService();
             var signature = cryptoServiceToSign.Sign(dataBytes);
             var parameters = cryptoServiceToSign.GetEncryptionParameters();

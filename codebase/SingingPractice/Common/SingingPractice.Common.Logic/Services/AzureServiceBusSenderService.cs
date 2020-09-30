@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using SingingPractice.Common.Constants;
 using SingingPractice.Common.Contracts.Services;
+using SingingPractice.Common.Logic.Extensions;
 
 namespace SingingPractice.Common.Logic.Services
 {
@@ -12,7 +13,7 @@ namespace SingingPractice.Common.Logic.Services
         public async Task SendAsync<T>(T data) where T : class
         {
             var serialized = JsonSerializer.Serialize(data);
-            var messageBody = Encoding.UTF8.GetBytes(serialized);
+            var messageBody = serialized.GetBytes();
 
             var builder = new ServiceBusConnectionStringBuilder(EnvironmentConstants.ServiceBusWriterConnection)
             {
