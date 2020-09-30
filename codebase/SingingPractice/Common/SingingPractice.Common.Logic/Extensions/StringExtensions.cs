@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace SingingPractice.Common.Extensions
+namespace SingingPractice.Common.Logic.Extensions
 {
     public static class StringExtensions
     {
