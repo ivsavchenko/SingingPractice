@@ -8,9 +8,17 @@
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="4.2.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SingingPractice.Common.Logic\SingingPractice.Common.Logic.csproj" />
+    <ProjectReference Include="..\..\Common\SingingPractice.Common\SingingPractice.Common.csproj" />
+    <ProjectReference Include="..\..\Data\SingingPractice.Database\SingingPractice.Database.csproj" />
+    <ProjectReference Include="..\SingingPractice.SignatureGenerator.Common\SingingPractice.SignatureGenerator.Common.csproj" />
+    <ProjectReference Include="..\SingingPractice.SignatureGenerator.Logic\SingingPractice.SignatureGenerator.Logic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
