@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using LinqToDB;
+using Microsoft.Azure.ServiceBus;
+using SingingPractice.Common.Constants;
 using SingingPractice.Common.Extensions;
 using SingingPractice.Database;
 using SingingPractice.RegistrationService.Web.Common.Contracts.Managers;
 using SingingPractice.RegistrationService.Web.Common.Enums;
 using SingingPractice.RegistrationService.Web.Common.Models.Licenses;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SingingPractice.RegistrationService.Web.Logic.Managers
 {
@@ -19,9 +21,18 @@ namespace SingingPractice.RegistrationService.Web.Logic.Managers
             this.singingPracticeDb = singingPracticeDb;
         }
 
-        public Task ActivateAsync(ActivateLicenseDto dto)
+        public async Task ActivateAsync(ActivateLicenseDto dto)
         {
-            throw new NotImplementedException();
+            var serialized = JsonSerializer.Serialize(dto);
+
+            var messageBody = System.Text.Encoding.Unicode.GetBytes(serialized);
+            var builder = new ServiceBusConnectionStringBuilder(EnvironmentConstants.ServiceBusWriterConnection)
+            {
+                EntityPath = EnvironmentConstants.ServiceBusEntityPath
+            };
+
+            var client = new QueueClient(builder);
+            await client.SendAsync(new Message(messageBody));
         }
 
         public async Task<LicenseStatus> ValidateAsync(string key)
