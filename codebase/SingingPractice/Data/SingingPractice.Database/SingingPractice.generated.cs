@@ -8,6 +8,7 @@
 #pragma warning disable 1591
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using LinqToDB;
@@ -22,7 +23,9 @@ namespace SingingPractice.Database
 	/// </summary>
 	public partial class SingingPracticeDb : LinqToDB.Data.DataConnection
 	{
-		public ITable<License> Licenses { get { return this.GetTable<License>(); } }
+		public ITable<Customer>        Customers        { get { return this.GetTable<Customer>(); } }
+		public ITable<CustomerLicense> CustomerLicenses { get { return this.GetTable<CustomerLicense>(); } }
+		public ITable<License>         Licenses         { get { return this.GetTable<License>(); } }
 
 		public SingingPracticeDb()
 		{
@@ -41,6 +44,50 @@ namespace SingingPractice.Database
 		partial void InitMappingSchema();
 	}
 
+	[Table(Schema="dbo", Name="Customers")]
+	public partial class Customer
+	{
+		[PrimaryKey, Identity   ] public int    Id               { get; set; } // int
+		[Column,     NotNull    ] public string Name             { get; set; } // nvarchar(100)
+		[Column,     NotNull    ] public string Email            { get; set; } // nvarchar(100)
+		[Column,        Nullable] public string Address          { get; set; } // nvarchar(max)
+		[Column,     NotNull    ] public string PublicParameters { get; set; } // nvarchar(max)
+
+		#region Associations
+
+		/// <summary>
+		/// FK_CustomerLicenses_Customers_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="CustomerId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<CustomerLicense> CustomerLicenses { get; set; }
+
+		#endregion
+	}
+
+	[Table(Schema="dbo", Name="CustomerLicenses")]
+	public partial class CustomerLicense
+	{
+		[PrimaryKey, Identity] public int  Id         { get; set; } // int
+		[Column,     NotNull ] public int  CustomerId { get; set; } // int
+		[Column,     NotNull ] public Guid LicenseId  { get; set; } // uniqueidentifier
+
+		#region Associations
+
+		/// <summary>
+		/// FK_CustomerLicenses_Customers
+		/// </summary>
+		[Association(ThisKey="CustomerId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_CustomerLicenses_Customers", BackReferenceName="CustomerLicenses")]
+		public Customer Customer { get; set; }
+
+		/// <summary>
+		/// FK_CustomerLicenses_Licenses
+		/// </summary>
+		[Association(ThisKey="LicenseId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_CustomerLicenses_Licenses", BackReferenceName="CustomerLicenses")]
+		public License License { get; set; }
+
+		#endregion
+	}
+
 	[Table(Schema="dbo", Name="Licenses")]
 	public partial class License
 	{
@@ -49,10 +96,32 @@ namespace SingingPractice.Database
 		[Column,     NotNull    ] public string    Salt           { get; set; } // nvarchar(100)
 		[Column,     NotNull    ] public DateTime  CreationDate   { get; set; } // datetime
 		[Column,        Nullable] public DateTime? ActivationDate { get; set; } // datetime
+
+		#region Associations
+
+		/// <summary>
+		/// FK_CustomerLicenses_Licenses_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="LicenseId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<CustomerLicense> CustomerLicenses { get; set; }
+
+		#endregion
 	}
 
 	public static partial class TableExtensions
 	{
+		public static Customer Find(this ITable<Customer> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
+		public static CustomerLicense Find(this ITable<CustomerLicense> table, int Id)
+		{
+			return table.FirstOrDefault(t =>
+				t.Id == Id);
+		}
+
 		public static License Find(this ITable<License> table, Guid Id)
 		{
 			return table.FirstOrDefault(t =>

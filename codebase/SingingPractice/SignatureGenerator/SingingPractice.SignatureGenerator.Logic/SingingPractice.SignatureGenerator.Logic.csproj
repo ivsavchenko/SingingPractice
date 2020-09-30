@@ -9,6 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\SingingPractice.Common.Logic\SingingPractice.Common.Logic.csproj" />
+    <ProjectReference Include="..\..\Common\SingingPractice.Common\SingingPractice.Common.csproj" />
+    <ProjectReference Include="..\..\Data\SingingPractice.Database\SingingPractice.Database.csproj" />
     <ProjectReference Include="..\SingingPractice.SignatureGenerator.Common\SingingPractice.SignatureGenerator.Common.csproj" />
   </ItemGroup>
 

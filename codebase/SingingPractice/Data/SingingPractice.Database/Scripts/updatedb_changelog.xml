@@ -11,4 +11,7 @@
   <changeSet author="ivsavchenko" id="1" runOnChange="false">
     <sqlFile path="Migrations/1-create-licenses.sql"/>
   </changeSet>
+  <changeSet author="ivsavchenko" id="2" runOnChange="false">
+    <sqlFile path="Migrations/2-create-customers-and-cl.sql"/>
+  </changeSet>
 </databaseChangeLog>
