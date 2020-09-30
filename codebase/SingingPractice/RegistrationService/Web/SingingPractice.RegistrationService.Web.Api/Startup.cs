@@ -24,7 +24,10 @@ namespace SingingPractice.RegistrationService.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddJsonOptions(opts => { opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); 
+                });
 
             services.AddApplicationInsightsTelemetry();
             WebDependenciesRegistration.Configure(services);
