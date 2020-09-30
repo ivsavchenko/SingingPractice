@@ -4,6 +4,10 @@ namespace SingingPractice.Common.Contracts.Services
 {
     public interface ICryptoService
     {
-        PublicPrivateKeysPair CreateKeys();
+        PublicPrivateKeysPair GetEncryptionParameters();
+
+        byte[] Sign(byte[] data);
+
+        bool Verify(byte[] data, byte[] signature);
     }
 }

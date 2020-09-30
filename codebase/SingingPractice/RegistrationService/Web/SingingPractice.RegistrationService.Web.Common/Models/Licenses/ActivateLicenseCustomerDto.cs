@@ -2,7 +2,7 @@
 
 namespace SingingPractice.RegistrationService.Web.Common.Models.Licenses
 {
-    public class ActivateLicenseUserDto
+    public class ActivateLicenseCustomerDto
     {
         [Required]
         public string Name { get; set; }

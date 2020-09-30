@@ -8,6 +8,8 @@ namespace SingingPractice.Common.Models.Services.CryptoService
 
         public byte[] PrivateKey { get; set; }
 
+        public string ParametersXml { get; set; }
+
         public string PublicKeyString => Convert.ToBase64String(PublicKey);
 
         public string PrivateKeyString => Convert.ToBase64String(PrivateKey);

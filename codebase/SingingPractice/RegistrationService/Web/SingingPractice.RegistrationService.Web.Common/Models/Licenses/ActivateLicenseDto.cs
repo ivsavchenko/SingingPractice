@@ -8,6 +8,6 @@ namespace SingingPractice.RegistrationService.Web.Common.Models.Licenses
         [Required]
         public Guid Key { get; set; }
 
-        public ActivateLicenseUserDto User { get; set; }
+        public ActivateLicenseCustomerDto User { get; set; }
     }
 }
