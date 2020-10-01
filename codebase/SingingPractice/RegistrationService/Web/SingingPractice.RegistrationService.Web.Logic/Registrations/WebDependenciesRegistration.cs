@@ -16,6 +16,7 @@ namespace SingingPractice.RegistrationService.Web.Logic.Registrations
             DatabaseRegistration.RegisterDatabase(EnvironmentConstants.ConnectionString);
 
             services.AddScoped<IHashingService, BCryptHashingService>();
+            services.AddScoped<ICryptoService, RsaCryptoService>();
             services.AddScoped<IMessageSenderService, AzureServiceBusSenderService>();
             
             services.AddScoped(s => new SingingPracticeDb());

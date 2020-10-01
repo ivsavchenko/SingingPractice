@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using LinqToDB;
 using SingingPractice.Common.Contracts.Services;
 using SingingPractice.Common.Logic.Extensions;
@@ -25,7 +26,7 @@ namespace SingingPractice.RegistrationService.Web.Logic.Managers
             cryptoService.Initialize(customer.PublicParameters);
 
             var textBytes = dto.Text.GetBytes();
-            var signatureBytes = dto.Signature.GetBytes();
+            var signatureBytes = Convert.FromBase64String(dto.Signature);
 
             var isTrusted = cryptoService.Verify(textBytes, signatureBytes);
 
