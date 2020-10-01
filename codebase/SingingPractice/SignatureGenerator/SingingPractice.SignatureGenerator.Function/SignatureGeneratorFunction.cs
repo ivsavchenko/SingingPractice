@@ -1,22 +1,22 @@
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using SingingPractice.SignatureGenerator.Common.Contracts.Services;
+using SingingPractice.SignatureGenerator.Common.Contracts.Managers;
 
 namespace SingingPractice.SignatureGenerator.Function
 {
     public class SignatureGeneratorFunction
     {
-        private readonly INotificationSender notificationSender; 
+        private readonly IRegistrationManager registrationManager;
 
-        public SignatureGeneratorFunction(INotificationSender notificationSender)
+        public SignatureGeneratorFunction(IRegistrationManager registrationManager)
         {
-            this.notificationSender = notificationSender;
+            this.registrationManager = registrationManager;
         }
 
         [FunctionName("SignatureGenerator")]
-        public async Task Run([ServiceBusTrigger("singing-practice", Connection = "ServiceBusReaderConnection")]string myQueueItem)
+        public async Task Run([ServiceBusTrigger("singing-practice", Connection = "ServiceBusReaderConnection")]string json)
         {
-            await notificationSender.SendAsync(myQueueItem);
+            await registrationManager.RegisterAsync(json);
         }
     }
 }

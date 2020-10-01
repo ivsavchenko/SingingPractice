@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using SingingPractice.Common.Models.Licenses;
 using SingingPractice.RegistrationService.Web.Common.Enums;
-using SingingPractice.RegistrationService.Web.Common.Models.Licenses;
 
 namespace SingingPractice.RegistrationService.Web.Common.Contracts.Managers
 {

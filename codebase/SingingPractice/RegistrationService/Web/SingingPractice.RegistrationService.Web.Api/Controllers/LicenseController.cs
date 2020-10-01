@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SingingPractice.Common.Models.Licenses;
 using SingingPractice.RegistrationService.Web.Common.Contracts.Managers;
-using SingingPractice.RegistrationService.Web.Common.Models.Licenses;
 
 namespace SingingPractice.RegistrationService.Web.Api.Controllers
 {

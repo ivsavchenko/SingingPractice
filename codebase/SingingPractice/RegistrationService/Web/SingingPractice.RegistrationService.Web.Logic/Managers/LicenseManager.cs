@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using LinqToDB;
 using SingingPractice.Common.Contracts.Services;
 using SingingPractice.Common.Logic.Extensions;
+using SingingPractice.Common.Models.Licenses;
 using SingingPractice.Database;
 using SingingPractice.RegistrationService.Web.Common.Contracts.Managers;
 using SingingPractice.RegistrationService.Web.Common.Enums;
-using SingingPractice.RegistrationService.Web.Common.Models.Licenses;
 
 namespace SingingPractice.RegistrationService.Web.Logic.Managers
 {

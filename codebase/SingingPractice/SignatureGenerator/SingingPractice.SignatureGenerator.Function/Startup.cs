@@ -1,6 +1,9 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using SingingPractice.Common.Constants;
+using SingingPractice.Common.Contracts.Services;
+using SingingPractice.Common.Logic.Services;
+using SingingPractice.Database;
 using SingingPractice.Database.Registrations;
 using SingingPractice.SignatureGenerator.Common.Contracts.Managers;
 using SingingPractice.SignatureGenerator.Common.Contracts.Services;
@@ -15,8 +18,11 @@ namespace SingingPractice.SignatureGenerator.Function
         public override void Configure(IFunctionsHostBuilder builder)
         {
             DatabaseRegistration.RegisterDatabase(EnvironmentConstants.ConnectionString);
-            builder.Services.AddSingleton<INotificationSender, FakeEmailNotificationSender>();
-            builder.Services.AddSingleton<IRegistrationManager, RegistrationManager>();
+            builder.Services.AddScoped<INotificationSender, FakeEmailNotificationSender>();
+            builder.Services.AddScoped<ICryptoService, RsaCryptoService>();
+            builder.Services.AddScoped<IHashingService, BCryptHashingService>();
+            builder.Services.AddScoped(s => new SingingPracticeDb());
+            builder.Services.AddScoped<IRegistrationManager, RegistrationManager>();
         }
     }
 }

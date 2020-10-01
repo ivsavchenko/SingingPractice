@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SingingPractice.RegistrationService.Web.Common.Models.Licenses
+namespace SingingPractice.Common.Models.Licenses
 {
     public class IssuedLicenseDto
     {

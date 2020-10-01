@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SingingPractice.RegistrationService.Web.Common.Models.Licenses
+namespace SingingPractice.Common.Models.Licenses
 {
     public class ActivateLicenseCustomerDto
     {

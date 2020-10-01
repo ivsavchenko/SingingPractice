@@ -10,15 +10,14 @@ namespace SingingPractice.Common.Logic.Services
         private readonly RSA rsa;
         private bool disposed = false;
 
-        public RsaCryptoService()
+        public RsaCryptoService(string parametersXml = null)
         {
             rsa = RSA.Create();
-        }
 
-        public RsaCryptoService(string parametersXml)
-        {
-            rsa = RSA.Create();
-            rsa.FromXmlString(parametersXml);
+            if (parametersXml != null)
+            {
+                rsa.FromXmlString(parametersXml);
+            }
         }
 
         public PublicPrivateKeysPair GetEncryptionParameters()
