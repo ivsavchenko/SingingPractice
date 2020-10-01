@@ -20,6 +20,7 @@ namespace SingingPractice.RegistrationService.Web.Logic.Registrations
             
             services.AddScoped(s => new SingingPracticeDb());
             services.AddScoped<ILicenseManager, LicenseManager>();
+            services.AddScoped<ISongManager, SongManager>();
         }
     }
 }

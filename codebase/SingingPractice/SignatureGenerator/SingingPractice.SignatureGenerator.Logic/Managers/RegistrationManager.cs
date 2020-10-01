@@ -72,7 +72,7 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
                 Address = licenseToActivate.User.Address,
                 Email = licenseToActivate.User.Email,
                 Name = licenseToActivate.User.Name,
-                PublicParameters = parameters.PrivateKeyString
+                PublicParameters = parameters.ParametersXml
             };
 
             var customerLicense = new CustomerLicense
@@ -95,9 +95,10 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
                 throw;
             }
 
-            var signingKey = existingCustomer == null
-                ? newCustomer.PublicParameters
-                : existingCustomer.PublicParameters;
+            var signingKey = existingCustomer == null ?
+                parameters.PrivateParametersXml // we use it only for demonstration needs. In real life we have to return only private key
+                : "Use the key received with the very first license";
+
             return signingKey;
         }
     }

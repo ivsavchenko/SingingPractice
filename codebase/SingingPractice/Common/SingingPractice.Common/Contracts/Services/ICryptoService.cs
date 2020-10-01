@@ -6,6 +6,8 @@ namespace SingingPractice.Common.Contracts.Services
     {
         PublicPrivateKeysPair GetEncryptionParameters();
 
+        void Initialize(string xml);
+
         byte[] Sign(byte[] data);
 
         bool Verify(byte[] data, byte[] signature);

@@ -26,10 +26,16 @@ namespace SingingPractice.Common.Logic.Services
             {
                 PrivateKey = rsa.ExportRSAPrivateKey(),
                 PublicKey = rsa.ExportRSAPublicKey(),
-                ParametersXml = rsa.ToXmlString(false)
+                ParametersXml = rsa.ToXmlString(false),
+                PrivateParametersXml = rsa.ToXmlString(true)
             };
             
             return keys;
+        }
+
+        public void Initialize(string xml)
+        {
+            rsa.FromXmlString(xml);
         }
 
         public byte[] Sign(byte[] data)
