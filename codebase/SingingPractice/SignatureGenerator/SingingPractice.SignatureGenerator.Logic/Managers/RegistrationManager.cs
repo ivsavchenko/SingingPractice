@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using SingingPractice.Common.Contracts.Services;
 using SingingPractice.Common.Logic.Extensions;
 using SingingPractice.Common.Models.Licenses;
+using SingingPractice.Common.Models.Services.CryptoService;
 using SingingPractice.Database;
 using SingingPractice.SignatureGenerator.Common.Contracts.Managers;
 using SingingPractice.SignatureGenerator.Common.Contracts.Services;
@@ -43,11 +44,19 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
                 return;
             }
 
+            await ActivateCustomersLicenseAsync(licenseToActivate, parameters, license);
+        }
+
+        private async Task ActivateCustomersLicenseAsync(ActivateLicenseDto licenseToActivate, PublicPrivateKeysPair parameters, License license)
+        {
+            var existingCustomer = await singingPracticeDb.Customers
+                .FirstOrDefaultAsync(l => l.Email.ToLower() == licenseToActivate.User.Email.ToLower());
+
             var customer = new Customer
             {
-                Address = licenseToActivate.User.Address, 
+                Address = licenseToActivate.User.Address,
                 Email = licenseToActivate.User.Email,
-                Name = licenseToActivate.User.Name, 
+                Name = licenseToActivate.User.Name,
                 PublicParameters = parameters.PrivateKeyString
             };
 
@@ -59,7 +68,7 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
             await using var transaction = await singingPracticeDb.BeginTransactionAsync();
             try
             {
-                customerLicense.CustomerId = await singingPracticeDb.InsertWithInt32IdentityAsync(customer);
+                customerLicense.CustomerId = existingCustomer == null ? await singingPracticeDb.InsertWithInt32IdentityAsync(customer) : existingCustomer.Id;
                 await singingPracticeDb.InsertWithInt32IdentityAsync(customerLicense);
                 license.ActivationDate = DateTime.UtcNow;
                 await singingPracticeDb.UpdateAsync(license);
