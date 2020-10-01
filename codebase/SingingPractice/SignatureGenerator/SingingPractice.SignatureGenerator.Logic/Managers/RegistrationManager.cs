@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 using SingingPractice.Common.Contracts.Services;
 using SingingPractice.Common.Logic.Extensions;
 using SingingPractice.Common.Models.Licenses;
-using SingingPractice.Common.Models.Services.CryptoService;
 using SingingPractice.Database;
 using SingingPractice.SignatureGenerator.Common.Contracts.Managers;
 using SingingPractice.SignatureGenerator.Common.Contracts.Services;
+using SingingPractice.SignatureGenerator.Common.Models.Notifications;
 
 namespace SingingPractice.SignatureGenerator.Logic.Managers
 {
@@ -21,7 +21,8 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
         private readonly IHashingService hashingService;
         private readonly ILogger<RegistrationManager> logger;
 
-        public RegistrationManager(SingingPracticeDb singingPracticeDb, INotificationSender notificationSender, ICryptoService cryptoService, IHashingService hashingService, ILogger<RegistrationManager> logger)
+        public RegistrationManager(SingingPracticeDb singingPracticeDb, INotificationSender notificationSender, 
+            ICryptoService cryptoService, IHashingService hashingService, ILogger<RegistrationManager> logger)
         {
             this.singingPracticeDb = singingPracticeDb;
             this.notificationSender = notificationSender;
@@ -33,7 +34,6 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
         public async Task RegisterAsync(string json)
         {
             var licenseToActivate = JsonSerializer.Deserialize<ActivateLicenseDto>(json);
-            var parameters = cryptoService.GetEncryptionParameters();
             var issuedLicense = licenseToActivate.Key.FromJsonBase64<IssuedLicenseDto>();
             var license = await singingPracticeDb.Licenses.FirstOrDefaultAsync(l => l.Id == issuedLicense.Id);
             var hash = hashingService.CreateHash(issuedLicense.Key.ToString(), license?.Salt);
@@ -44,15 +44,30 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
                 return;
             }
 
-            await ActivateCustomersLicenseAsync(licenseToActivate, parameters, license);
+            var signingKey = await ActivateCustomersLicenseAsync(licenseToActivate, license);
+            await SendNotificationAsync(licenseToActivate, signingKey);
         }
 
-        private async Task ActivateCustomersLicenseAsync(ActivateLicenseDto licenseToActivate, PublicPrivateKeysPair parameters, License license)
+        private async Task SendNotificationAsync(ActivateLicenseDto licenseToActivate, string signingKey)
+        {
+            var notification = new EmailNotificationDbo
+            {
+                Email = licenseToActivate.User.Email,
+                Name = licenseToActivate.User.Name,
+                SigningKey = signingKey
+            };
+
+            await notificationSender.SendAsync(notification);
+        }
+
+        private async Task<string> ActivateCustomersLicenseAsync(ActivateLicenseDto licenseToActivate, License license)
         {
             var existingCustomer = await singingPracticeDb.Customers
                 .FirstOrDefaultAsync(l => l.Email.ToLower() == licenseToActivate.User.Email.ToLower());
 
-            var customer = new Customer
+            var parameters = cryptoService.GetEncryptionParameters();
+
+            var newCustomer = new Customer
             {
                 Address = licenseToActivate.User.Address,
                 Email = licenseToActivate.User.Email,
@@ -68,7 +83,7 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
             await using var transaction = await singingPracticeDb.BeginTransactionAsync();
             try
             {
-                customerLicense.CustomerId = existingCustomer == null ? await singingPracticeDb.InsertWithInt32IdentityAsync(customer) : existingCustomer.Id;
+                customerLicense.CustomerId = existingCustomer == null ? await singingPracticeDb.InsertWithInt32IdentityAsync(newCustomer) : existingCustomer.Id;
                 await singingPracticeDb.InsertWithInt32IdentityAsync(customerLicense);
                 license.ActivationDate = DateTime.UtcNow;
                 await singingPracticeDb.UpdateAsync(license);
@@ -79,6 +94,11 @@ namespace SingingPractice.SignatureGenerator.Logic.Managers
                 await transaction.RollbackAsync();
                 throw;
             }
+
+            var signingKey = existingCustomer == null
+                ? newCustomer.PublicParameters
+                : existingCustomer.PublicParameters;
+            return signingKey;
         }
     }
 }
